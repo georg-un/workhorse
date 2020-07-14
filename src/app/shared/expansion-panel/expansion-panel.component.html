@@ -1,0 +1,19 @@
+<mat-expansion-panel expanded="true">
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      {{ (toDo$ | async)?.title || 'No title' }}
+    </mat-panel-title>
+  </mat-expansion-panel-header>
+  <app-status-buttons
+    [status$]="status$"
+    (buttonClick)="onStatusButtonClick($event)"
+  ></app-status-buttons>
+  <hr/>
+  <app-due-date
+    [dueDate$]="dueDate$"
+    (dueDateSet)="onDueDateSet($event)"
+  ></app-due-date>
+  <!--  <app-dependencies></app-dependencies>
+    <app-comments></app-comments>
+    <app-categories></app-categories>  -->
+</mat-expansion-panel>
