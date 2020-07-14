@@ -125,6 +125,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "workhorse"
+    }
+  },
+  "defaultProject": "workhorse",
+  "cli": {
+    "analytics": false
+  }
 }
