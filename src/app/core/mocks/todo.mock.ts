@@ -64,3 +64,7 @@ const T9 = new ToDo();
 T9.id = 'TODOID9';
 T9.title = 'Find out how one can become a superhero';
 T9.status = Status.Open;
+
+export const TODO_MOCKS = [
+  T1, T2, T3, T4, T5, T6, T7, T8, T9
+];
