@@ -1,0 +1,35 @@
+<p class="item-row">
+  <span>
+    <mat-icon>alarm</mat-icon>
+    <mat-form-field class="datepicker-form-field" appearance="fill">
+      <input matInput [matDatepicker]="picker" (dateInput)="onCalendarSelection($event.value)">
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    {{ dueDate$ | async | dueDate }}
+  </span>
+
+  <span>
+      <ng-container *ngIf="(dueDate$ | async)?.getTime() else add">
+        <button
+          mat-icon-button
+          class="add-button"
+          (click)="onDeleteButtonClick()"
+        >
+          <mat-icon>
+            delete
+          </mat-icon>
+        </button>
+      </ng-container>
+      <ng-template #add>
+        <button
+          mat-icon-button
+          class="add-button"
+          (click)="picker.open()"
+        >
+          <mat-icon>
+            add
+          </mat-icon>
+        </button>
+      </ng-template>
+  </span>
+</p>

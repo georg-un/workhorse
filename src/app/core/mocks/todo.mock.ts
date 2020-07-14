@@ -21,6 +21,7 @@ T3.id = 'TODOID3';
 T3.title = 'Buy a guitar';
 T3.status = Status.Open;
 T3.categories = ['ID1'];
+T3.dueDate = new Date().toISOString();
 T3.dependencies = ['TODOID2'];
 
 const T4 = new ToDo();
@@ -37,6 +38,7 @@ T5.id = 'TODOID5';
 T5.title = 'Buy ingredients';
 T5.status = Status.Open;
 T5.categories = ['ID2'];
+T5.dueDate = new Date(new Date().getTime() + (14 * 1000 * 60 * 60)).toISOString();
 T5.comments = [
   '- [x] Wheat\n-[ ] Yeast\n- [x] Tomato Puree\n- [ ] Mozzarella'
 ];
