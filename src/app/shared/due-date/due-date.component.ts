@@ -11,7 +11,7 @@ import { Observable } from 'rxjs';
 })
 export class DueDateComponent implements OnInit {
 
-  @Input() dueDate$: Observable<Date>;
+  @Input() dueDate$: Observable<Date>; // repeat every n minutes to update the text
   @Output() dueDateSet: EventEmitter<Date> = new EventEmitter<Date>();
 
   constructor() { }

@@ -8,12 +8,18 @@
     [status$]="status$"
     (buttonClick)="onStatusButtonClick($event)"
   ></app-status-buttons>
-  <hr/>
+  <mat-divider></mat-divider>
   <app-due-date
     [dueDate$]="dueDate$"
     (dueDateSet)="onDueDateSet($event)"
   ></app-due-date>
-  <!--  <app-dependencies></app-dependencies>
-    <app-comments></app-comments>
-    <app-categories></app-categories>  -->
+  <mat-divider></mat-divider>
+  <!--  <app-dependencies></app-dependencies> -->
+    <app-comments
+      [comments$]="comments$"
+      (commentAdded)="onCommentAdded($event)"
+      (commentEdited)="onCommentEdited($event)"
+      (commentDeleted)="onCommentDeleted($event)"
+    ></app-comments>
+<!--    <app-categories></app-categories>  -->
 </mat-expansion-panel>

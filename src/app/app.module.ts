@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LayoutModule } from './layout/layout.module';
 import { ListPageModule } from './pages/list/list.page.module';
+import { MarkdownModule } from 'ngx-markdown';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { ListPageModule } from './pages/list/list.page.module';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    MarkdownModule.forRoot(),
     LayoutModule,
     ListPageModule
   ],

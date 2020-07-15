@@ -4,6 +4,8 @@ import { ExpansionPanelComponent } from './expansion-panel.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { StatusButtonsModule } from '../status-buttons/status-buttons.module';
 import { DueDateModule } from '../due-date/due-date.module';
+import { CommentsModule } from '../comments/comments.module';
+import { MatDividerModule } from '@angular/material/divider';
 
 
 
@@ -16,7 +18,9 @@ import { DueDateModule } from '../due-date/due-date.module';
     CommonModule,
     MatExpansionModule,
     StatusButtonsModule,
-    DueDateModule
+    DueDateModule,
+    CommentsModule,
+    MatDividerModule
   ]
 })
 export class ExpansionPanelModule { }

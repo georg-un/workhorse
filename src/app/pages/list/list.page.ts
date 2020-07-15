@@ -17,7 +17,7 @@ export class ListPage implements OnInit {
 
   ngOnInit(): void {
     this.toDos = TODO_MOCKS;
-    this.toDo$ = of(this.toDos[0]);
+    this.toDo$ = of(this.toDos[4]);
   }
 
 }
