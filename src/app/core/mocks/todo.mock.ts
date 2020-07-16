@@ -1,6 +1,6 @@
 import { ToDo } from '../models/todo.model';
 import { Status } from '../models/status.enum';
-import { COMMENTS } from './comment.mock';
+import { COMMENT_MOCK } from './comment.mock';
 
 
 // Category: Music
@@ -31,7 +31,7 @@ T4.title = 'Learn how to play';
 T4.status = Status.Open;
 T4.dueDate = '2021-07-10T18:00:00.000Z';
 T4.categories = ['ID1'];
-T4.comments = [COMMENTS[2].id];
+T4.comments = [COMMENT_MOCK[2].id];
 
 
 // Category Make a Pizza
@@ -39,9 +39,9 @@ const T5 = new ToDo();
 T5.id = 'TODOID5';
 T5.title = 'Buy ingredients';
 T5.status = Status.Open;
-T5.categories = ['ID2'];
+T5.categories = ['ID2', 'ID3'];
 T5.dueDate = new Date(new Date().getTime() + (14 * 1000 * 60 * 60)).toISOString();
-T5.comments = [COMMENTS[0].id, COMMENTS[1].id, COMMENTS[2].id, COMMENTS[3].id];
+T5.comments = [COMMENT_MOCK[0].id, COMMENT_MOCK[1].id, COMMENT_MOCK[2].id, COMMENT_MOCK[3].id];
 
 const T6 = new ToDo();
 T6.id = 'TODOID6';

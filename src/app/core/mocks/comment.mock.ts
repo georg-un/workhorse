@@ -29,6 +29,6 @@ const C4: Comment = {
   createDate: '2020-01-04T09:00:00.000Z'
 };
 
-export const COMMENTS = [
+export const COMMENT_MOCK = [
   C1, C2, C3, C4
 ];

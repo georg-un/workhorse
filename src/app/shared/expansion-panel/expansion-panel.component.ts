@@ -4,7 +4,9 @@ import { Observable } from 'rxjs';
 import { Status } from '../../core/models/status.enum';
 import { map } from 'rxjs/operators';
 import { Comment } from '../../core/models/comment.model';
-import { COMMENTS } from '../../core/mocks/comment.mock';
+import { COMMENT_MOCK } from '../../core/mocks/comment.mock';
+import { Category } from '../../core/models/category.model';
+import { CATEGORY_MOCK } from '../../core/mocks/category.mock';
 
 @Component({
   selector: 'app-expansion-panel',
@@ -18,13 +20,15 @@ export class ExpansionPanelComponent implements OnInit {
   status$: Observable<Status>;
   dueDate$: Observable<Date>;
   comments$: Observable<Comment[]>;
+  categories$: Observable<Category[]>;
 
   constructor() { }
 
   ngOnInit(): void {
     this.status$ = this.toDo$.pipe(map(t => t.status));
     this.dueDate$ = this.toDo$.pipe(map(t => new Date(t.dueDate)));
-    this.comments$ = this.toDo$.pipe(map(t => COMMENTS.filter(c => t.comments.includes(c.id))));
+    this.comments$ = this.toDo$.pipe(map(t => COMMENT_MOCK.filter(c => t.comments.includes(c.id))));
+    this.categories$ = this.toDo$.pipe(map(t => CATEGORY_MOCK.filter(c => t.categories.includes(c.id))));
   }
 
   onStatusButtonClick($event: string): void {
@@ -47,4 +51,11 @@ export class ExpansionPanelComponent implements OnInit {
     console.log({commentDeleted: $event});
   }
 
+  onCategoryAdded($event: string): void {
+    console.log({categoryAdded: $event});
+  }
+
+  onCategoryRemoved($event: string): void {
+    console.log({categoryRemoved: $event});
+  }
 }

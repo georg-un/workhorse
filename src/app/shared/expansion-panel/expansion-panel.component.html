@@ -21,5 +21,10 @@
       (commentEdited)="onCommentEdited($event)"
       (commentDeleted)="onCommentDeleted($event)"
     ></app-comments>
-<!--    <app-categories></app-categories>  -->
+  <mat-divider></mat-divider>
+    <app-categories
+      [categories$]="categories$"
+      (categoryAdded$)="onCategoryAdded($event)"
+      (categoryRemoved$)="onCategoryRemoved($event)"
+    ></app-categories>
 </mat-expansion-panel>
