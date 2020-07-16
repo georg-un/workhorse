@@ -8,9 +8,10 @@
   </button>
 </p>
 
-<div #showEditor [attr.data-show]="false">
-  <ng-container *ngIf="showEditor['data-show']">
-    <div class="comment">
+<div class="item-content">
+  <div #showEditor [attr.data-show]="false">
+    <ng-container *ngIf="showEditor['data-show']">
+      <div class="comment">
       <textarea
         #commentInput
         matInput
@@ -18,7 +19,7 @@
         cdkAutosizeMinRows="1"
         cdkAutosizeMaxRows="15">
       </textarea>
-      <span>
+        <span>
         <button mat-flat-button
                 (click)="onCommentSave('new', commentInput.value); showEditor['data-show']=false;"
         >SAVE</button>
@@ -26,37 +27,36 @@
                 (click)="onEditCancel('new'); showEditor['data-show']=false;"
         >CANCEL</button>
       </span>
-    </div>
-  </ng-container>
-</div>
+      </div>
+    </ng-container>
+  </div>
 
-
-<div
-  class="comment"
-  *ngFor="let comment of (comments$ | async)"
->
-  <button mat-icon-button
-          class="menu-button"
-          [mat-menu-trigger-for]="menu"
-          *ngIf="!showEditor['data-show']"
+  <div
+    class="comment"
+    *ngFor="let comment of (comments$ | async)"
   >
-    <mat-icon>more_vert</mat-icon>
-  </button>
-  <mat-menu #menu="matMenu">
-    <button mat-menu-item
-            (click)="showEditor['data-show'] =! showEditor['data-show']"
+    <button mat-icon-button
+            class="menu-button"
+            [mat-menu-trigger-for]="menu"
+            *ngIf="!showEditor['data-show']"
     >
-      <mat-icon>edit</mat-icon>
-      <span>Edit comment</span>
+      <mat-icon>more_vert</mat-icon>
     </button>
-    <button mat-menu-item (click)="onCommentDelete(comment?.id)">
-      <mat-icon>delete</mat-icon>
-      <span>Delete comment</span>
-    </button>
-  </mat-menu>
-  <div #showEditor [attr.data-show]="false">
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item
+              (click)="showEditor['data-show'] =! showEditor['data-show']"
+      >
+        <mat-icon>edit</mat-icon>
+        <span>Edit comment</span>
+      </button>
+      <button mat-menu-item (click)="onCommentDelete(comment?.id)">
+        <mat-icon>delete</mat-icon>
+        <span>Delete comment</span>
+      </button>
+    </mat-menu>
+    <div #showEditor [attr.data-show]="false">
 
-    <ng-container *ngIf="showEditor['data-show'] else showMarkdown">
+      <ng-container *ngIf="showEditor['data-show'] else showMarkdown">
       <textarea
         [value]="comment?.content"
         #commentInput
@@ -65,7 +65,7 @@
         cdkAutosizeMinRows="1"
         cdkAutosizeMaxRows="15">
       </textarea>
-      <span>
+        <span>
         <button mat-flat-button
                 (click)="onCommentSave(comment?.id, commentInput.value); showEditor['data-show']=false;"
         >SAVE</button>
@@ -73,16 +73,17 @@
                 (click)="onEditCancel(comment?.id); showEditor['data-show']=false;"
         >CANCEL</button>
       </span>
-    </ng-container>
+      </ng-container>
 
-    <ng-template #showMarkdown>
-      <markdown>
-        {{ comment?.content }}
-      </markdown>
-      <p class="date-footer">
-        {{ comment?.createDate | date }}
-      </p>
-    </ng-template>
+      <ng-template #showMarkdown>
+        <markdown>
+          {{ comment?.content }}
+        </markdown>
+        <p class="date-footer">
+          {{ comment?.createDate | date }}
+        </p>
+      </ng-template>
 
+    </div>
   </div>
 </div>
