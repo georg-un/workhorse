@@ -1,6 +1,6 @@
 import { Status } from './status.enum';
 
-export class ToDo {
+export interface ToDo {
   id: string;
   title: string;
   status: Status;

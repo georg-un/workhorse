@@ -16,11 +16,11 @@ import { CATEGORY_MOCK } from '../../core/mocks/category.mock';
 export class ExpansionPanelComponent implements OnInit {
 
   @Input() toDo$: Observable<ToDo>;
+  @Input() comments$: Observable<Comment[]>;
+  @Input() categories$: Observable<Category[]>;
 
   status$: Observable<Status>;
   dueDate$: Observable<Date>;
-  comments$: Observable<Comment[]>;
-  categories$: Observable<Category[]>;
 
   constructor() { }
 

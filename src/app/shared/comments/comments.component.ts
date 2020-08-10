@@ -80,10 +80,6 @@ export class CommentsComponent implements OnInit {
     }
   }
 
-  onEditCancel(commentId: string): void {
-
-  }
-
   onCommentDelete(commentId: string): void {
     const dialogref = this.dialog.open(DynamicDialogComponent, {
       data: this.deleteCommentDialogData
