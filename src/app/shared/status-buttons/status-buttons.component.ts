@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Observable } from 'rxjs';
 import { Status } from '../../core/models/status.enum';
 import { StatusAction } from './status-action.enum';
 
@@ -13,13 +12,14 @@ import { StatusAction } from './status-action.enum';
 })
 export class StatusButtonsComponent implements OnInit {
 
-  @Input() status$: Observable<Status>;
+  @Input() status: Status;
   @Output() buttonClick: EventEmitter<StatusAction> = new EventEmitter<StatusAction>();
 
-  readonly status: typeof Status = Status;
+  readonly statusEnum: typeof Status = Status;
   readonly statusAction: typeof StatusAction = StatusAction;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
   }

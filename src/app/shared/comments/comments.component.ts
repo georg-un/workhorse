@@ -58,7 +58,8 @@ export class CommentsComponent implements OnInit {
 
   constructor(
     private dialog: MatDialog
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
   }

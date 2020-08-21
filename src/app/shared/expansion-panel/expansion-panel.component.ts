@@ -1,12 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ToDo } from '../../core/models/todo.model';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Status } from '../../core/models/status.enum';
 import { map } from 'rxjs/operators';
 import { Comment } from '../../core/models/comment.model';
-import { COMMENT_MOCK } from '../../core/mocks/comment.mock';
 import { Category } from '../../core/models/category.model';
-import { CATEGORY_MOCK } from '../../core/mocks/category.mock';
+import { Select } from '@ngxs/store';
 
 @Component({
   selector: 'app-expansion-panel',
@@ -15,20 +14,28 @@ import { CATEGORY_MOCK } from '../../core/mocks/category.mock';
 })
 export class ExpansionPanelComponent implements OnInit {
 
-  @Input() toDo$: Observable<ToDo>;
-  @Input() comments$: Observable<Comment[]>;
-  @Input() categories$: Observable<Category[]>;
+  @Input() toDo: ToDo;
 
-  status$: Observable<Status>;
+  @Select(state => state.entities.comments) allComments$: Observable<Comment[]>;
+  @Select(state => state.entities.categories) allCategories$: Observable<Category[]>;
+
+  status: Status;
   dueDate$: Observable<Date>;
+  comments$: Observable<Comment[]>;
+  categories$: Observable<Category[]>;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
-    this.status$ = this.toDo$.pipe(map(t => t.status));
-    this.dueDate$ = this.toDo$.pipe(map(t => new Date(t.dueDate)));
-    this.comments$ = this.toDo$.pipe(map(t => COMMENT_MOCK.filter(c => t.comments.includes(c.id))));
-    this.categories$ = this.toDo$.pipe(map(t => CATEGORY_MOCK.filter(c => t.categories.includes(c.id))));
+    this.status = this.toDo.status;
+    this.dueDate$ = of(new Date(this.toDo.dueDate));
+    this.comments$ = this.allComments$.pipe(
+      map(comments => comments.filter(c => this.toDo.comments?.includes(c.id)))
+    );
+    this.categories$ = this.allCategories$.pipe(
+      map(categories => categories.filter(c => this.toDo.categories?.includes(c.id)))
+    );
   }
 
   onStatusButtonClick($event: string): void {

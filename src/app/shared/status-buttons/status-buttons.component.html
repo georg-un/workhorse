@@ -1,16 +1,16 @@
 <p>
-  <ng-container *ngIf="status$ | async as toDoStatus">
-    <ng-container *ngIf="toDoStatus === status.Open">
+  <ng-container *ngIf="status">
+    <ng-container *ngIf="status === statusEnum.Open">
       <button mat-flat-button color="primary" (click)="onClick(statusAction.CLOSE)">CLOSE</button>
       <button mat-flat-button color="accent" (click)="onClick(statusAction.ON_HOLD)">ON HOLD</button>
       <button mat-flat-button color="warn" (click)="onClick(statusAction.CANCEL)">CANCEL</button>
     </ng-container>
-    <ng-container *ngIf="toDoStatus === status.Waiting">
+    <ng-container *ngIf="status === statusEnum.Waiting">
       <button mat-flat-button color="primary" (click)="onClick(statusAction.CLOSE)">CLOSE</button>
       <button mat-flat-button color="accent" (click)="onClick(statusAction.REOPEN)">REOPEN</button>
       <button mat-flat-button color="warn" (click)="onClick(statusAction.CANCEL)">CANCEL</button>
     </ng-container>
-    <ng-container *ngIf="toDoStatus !== status.Waiting && toDoStatus !== status.Open">
+    <ng-container *ngIf="status !== statusEnum.Waiting && status !== statusEnum.Open">
       <button mat-flat-button color="primary" (click)="onClick(statusAction.ARCHIVE)">ARCHIVE</button>
       <button mat-flat-button color="accent" (click)="onClick(statusAction.REOPEN)">REOPEN</button>
       <button mat-flat-button color="warn" (click)="onClick(statusAction.DELETE)">DELETE</button>
