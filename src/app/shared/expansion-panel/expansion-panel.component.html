@@ -1,16 +1,16 @@
 <mat-expansion-panel expanded="true">
   <mat-expansion-panel-header>
     <mat-panel-title>
-      {{ (toDo$ | async)?.title || 'No title' }}
+      {{ toDo?.title || 'No title' }}
     </mat-panel-title>
   </mat-expansion-panel-header>
   <app-status-buttons
-    [status$]="status$"
+    [status]="status"
     (buttonClick)="onStatusButtonClick($event)"
   ></app-status-buttons>
   <mat-divider></mat-divider>
   <app-due-date
-    [dueDate$]="dueDate$"
+    [dueDate]="dueDate"
     (dueDateSet)="onDueDateSet($event)"
   ></app-due-date>
   <mat-divider></mat-divider>
@@ -24,6 +24,7 @@
   <mat-divider></mat-divider>
     <app-categories
       [categories$]="categories$"
+      [allCategories$]="allCategories$"
       (categoryAdded$)="onCategoryAdded($event)"
       (categoryRemoved$)="onCategoryRemoved($event)"
     ></app-categories>

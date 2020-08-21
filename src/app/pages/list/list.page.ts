@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ToDo } from '../../core/models/todo.model';
-import { TODO_MOCKS } from '../../core/mocks/todo.mock';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
+import { Select } from '@ngxs/store';
 
 @Component({
   selector: 'app-list',
@@ -10,14 +10,11 @@ import { Observable, of } from 'rxjs';
 })
 export class ListPage implements OnInit {
 
-  toDos: ToDo[];
-  toDo$: Observable<ToDo>;
+  @Select(state => state.entities.toDos) toDos$: Observable<ToDo[]>;
 
   constructor() { }
 
   ngOnInit(): void {
-    this.toDos = TODO_MOCKS;
-    this.toDo$ = of(this.toDos[4]);
   }
 
 }

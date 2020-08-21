@@ -1,5 +1,7 @@
 <mat-accordion>
   <app-expansion-panel
-    [toDo$]="toDo$">
+    *ngFor="let toDo of toDos$ | async"
+    [toDo]="toDo"
+  >
   </app-expansion-panel>
 </mat-accordion>

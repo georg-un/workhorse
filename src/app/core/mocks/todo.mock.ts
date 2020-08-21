@@ -2,71 +2,84 @@ import { ToDo } from '../models/todo.model';
 import { Status } from '../models/status.enum';
 import { COMMENT_MOCK } from './comment.mock';
 
-
-// Category: Music
-const T1 = new ToDo();
-T1.id = 'TODOID1';
-T1.title = 'Get a guitar';
-T1.status = Status.Open;
-T1.categories = ['ID1'];
-T1.children = ['TODOID2', 'TODOID3'];
-
-const T2 = new ToDo();
-T2.id = 'TODOID2';
-T2.title = 'Look for good guitars';
-T2.status = Status.Done;
-T2.categories = ['ID1'];
-
-const T3 = new ToDo();
-T3.id = 'TODOID3';
-T3.title = 'Buy a guitar';
-T3.status = Status.Open;
-T3.categories = ['ID1'];
-T3.dueDate = new Date().toISOString();
-T3.dependencies = ['TODOID2'];
-
-const T4 = new ToDo();
-T4.id = 'TODOID4';
-T4.title = 'Learn how to play';
-T4.status = Status.Open;
-T4.dueDate = '2021-07-10T18:00:00.000Z';
-T4.categories = ['ID1'];
-T4.comments = [COMMENT_MOCK[2].id];
+const T1 = {
+  id: 'TODOID1',
+  title: 'Get a guitar',
+  status: Status.Open,
+  categories: ['ID1'],
+  children: ['TODOID2', 'TODOID3']
+} as ToDo;
 
 
-// Category Make a Pizza
-const T5 = new ToDo();
-T5.id = 'TODOID5';
-T5.title = 'Buy ingredients';
-T5.status = Status.Open;
-T5.categories = ['ID2', 'ID3'];
-T5.dueDate = new Date(new Date().getTime() + (14 * 1000 * 60 * 60)).toISOString();
-T5.comments = [COMMENT_MOCK[0].id, COMMENT_MOCK[1].id, COMMENT_MOCK[2].id, COMMENT_MOCK[3].id];
+const T2 = {
+  id: 'TODOID2',
+  title: 'Look for good guitars',
+  status: Status.Done,
+  categories: ['ID1']
+} as ToDo;
 
-const T6 = new ToDo();
-T6.id = 'TODOID6';
-T6.title = 'Preheat oven';
-T6.status = Status.Waiting;
-T6.categories = ['ID2'];
 
-// Uncategorized
-const T7 = new ToDo();
-T7.id = 'TODOID7';
-T7.title = 'Become Iron Man';
-T7.status = Status.Open;
-T7.dependencies = ['TODOID9'];
+const T3 = {
+  id: 'TODOID3',
+  title: 'Buy a guitar',
+  status: Status.Open,
+  categories: ['ID1'],
+  dueDate: new Date().toISOString(),
+  dependencies: ['TODOID2']
+} as ToDo;
 
-const T8 = new ToDo();
-T8.id = 'TODOID8';
-T8.title = 'Become Stone Man';
-T8.status = Status.Canceled;
-T8.dependencies = ['TODOID9'];
 
-const T9 = new ToDo();
-T9.id = 'TODOID9';
-T9.title = 'Find out how one can become a superhero';
-T9.status = Status.Open;
+const T4 = {
+  id: 'TODOID4',
+  title: 'Learn how to play',
+  status: Status.Open,
+  dueDate: '2021-07-10T18:00:00.000Z',
+  categories: ['ID1'],
+  comments: [COMMENT_MOCK[2].id]
+} as ToDo;
 
-export const TODO_MOCKS = [
+
+const T5 = {
+  id: 'TODOID5',
+  title: 'Buy ingredients',
+  status: Status.Open,
+  categories: ['ID2', 'ID3'],
+  dueDate: new Date(new Date().getTime() + (14 * 1000 * 60 * 60)).toISOString(),
+  comments: [COMMENT_MOCK[0].id, COMMENT_MOCK[1].id, COMMENT_MOCK[2].id, COMMENT_MOCK[3].id]
+} as ToDo;
+
+
+const T6 = {
+  id: 'TODOID6',
+  title: 'Preheat oven',
+  status: Status.Waiting,
+  categories: ['ID2'],
+} as ToDo;
+
+
+const T7 = {
+  id: 'TODOID7',
+  title: 'Become Iron Man',
+  status: Status.Open,
+  dependencies: ['TODOID9']
+} as ToDo;
+
+
+const T8 = {
+  id: 'TODOID8',
+  title: 'Become Stone Man',
+  status: Status.Canceled,
+  dependencies: ['TODOID9']
+} as ToDo;
+
+
+const T9 = {
+  id: 'TODOID9',
+  title: 'Find out how one can become a superhero',
+  status: Status.Open
+} as ToDo;
+
+
+export const TODO_MOCKS: ToDo[] = [
   T1, T2, T3, T4, T5, T6, T7, T8, T9
 ];

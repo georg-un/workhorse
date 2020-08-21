@@ -1,12 +1,11 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Category } from '../../core/models/category.model';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { FormControl } from '@angular/forms';
-import { map, startWith, take, withLatestFrom } from 'rxjs/operators';
+import { map, take, withLatestFrom } from 'rxjs/operators';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
-import { CATEGORY_MOCK } from '../../core/mocks/category.mock';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
@@ -25,6 +24,11 @@ export class CategoriesComponent implements OnInit {
   @Input() categories$: Observable<Category[]>;
 
   /**
+   * All available categories
+   */
+  @Input() allCategories$: Observable<Category[]>;
+
+  /**
    * Emits the id of an added category
    */
   @Output() categoryAdded$: EventEmitter<string> = new EventEmitter<string>();
@@ -39,20 +43,20 @@ export class CategoriesComponent implements OnInit {
   separatorKeysCodes: number[] = [ENTER, COMMA];
   categoryControl = new FormControl();
   filteredCategories$: Observable<Category[]>;
-  allCategories$: Observable<Category[]>;
 
-  constructor(private snackBar: MatSnackBar) { }
+  constructor(private snackBar: MatSnackBar) {
+  }
 
   ngOnInit(): void {
-    this.allCategories$ = of(CATEGORY_MOCK);
-
-    this.filteredCategories$ =
-      this.categoryControl.valueChanges.pipe(
-      startWith(null),
+    // Generate autocomplete options
+    this.filteredCategories$ = this.categories$.pipe(
       withLatestFrom(this.allCategories$),
-      map(([categoryInput, allCategories]: [string | null, Category[]]) => {
-        return categoryInput ? this.filter(categoryInput, allCategories) : allCategories.slice();
-      }));
+      map(([categories, allCategories]: [Category[] | undefined, Category[]]) => {
+        return allCategories.filter(available => {
+          return !categories.map(c => c.id).includes(available.id);
+        });
+      })
+    );
   }
 
   onCategoryAdd(event: MatChipInputEvent): void {
