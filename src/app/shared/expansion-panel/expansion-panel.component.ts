@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ToDo } from '../../core/models/todo.model';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Status } from '../../core/models/status.enum';
 import { map } from 'rxjs/operators';
 import { Comment } from '../../core/models/comment.model';
@@ -20,7 +20,7 @@ export class ExpansionPanelComponent implements OnInit {
   @Select(state => state.entities.categories) allCategories$: Observable<Category[]>;
 
   status: Status;
-  dueDate$: Observable<Date>;
+  dueDate: Date;
   comments$: Observable<Comment[]>;
   categories$: Observable<Category[]>;
 
@@ -29,7 +29,7 @@ export class ExpansionPanelComponent implements OnInit {
 
   ngOnInit(): void {
     this.status = this.toDo.status;
-    this.dueDate$ = of(new Date(this.toDo.dueDate));
+    this.dueDate = new Date(this.toDo.dueDate);
     this.comments$ = this.allComments$.pipe(
       map(comments => comments.filter(c => this.toDo.comments?.includes(c.id)))
     );

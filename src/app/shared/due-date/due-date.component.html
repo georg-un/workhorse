@@ -5,11 +5,11 @@
       <input matInput [matDatepicker]="picker" (dateInput)="onCalendarSelection($event.value)">
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
-    {{ dueDate$ | async | dueDate }}
+    {{ updatingDueDate | dueDate }}
   </span>
 
   <span>
-      <ng-container *ngIf="(dueDate$ | async)?.getTime() else add">
+      <ng-container *ngIf="updatingDueDate?.getTime() else add">
         <button
           mat-icon-button
           class="add-button"
