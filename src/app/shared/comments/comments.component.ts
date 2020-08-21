@@ -2,9 +2,9 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Comment } from '../../core/models/comment.model';
 import { take } from 'rxjs/operators';
-import { DynamicDialogButton, DynamicDialogData } from '../dynamic-dialog/dynamic-dialog-data.model';
 import { MatDialog } from '@angular/material/dialog';
 import { DynamicDialogComponent } from '../dynamic-dialog/dynamic-dialog.component';
+import { deleteCommentDialogData } from './comments.dialog-data';
 
 @Component({
   selector: 'app-comments',
@@ -16,28 +16,6 @@ import { DynamicDialogComponent } from '../dynamic-dialog/dynamic-dialog.compone
   preserveWhitespaces: true  // required for ngx-markdown
 })
 export class CommentsComponent implements OnInit {
-
-  private readonly deleteCommentDialogData = {
-    bodyHTML: `
-    Are you sure you want to delete this comment?
-    <br/><br/>
-    This action cannot be undone.
-    <br/><br/>
-    `,
-    buttons: [
-      {
-        index: 0,
-        label: 'Cancel',
-        result: false
-      } as DynamicDialogButton,
-      {
-        index: 1,
-        label: 'Delete',
-        color: 'warn',
-        result: true
-      } as DynamicDialogButton
-    ]
-  } as DynamicDialogData;
 
   @Input() comments$: Observable<Comment[]>;
 
@@ -68,7 +46,7 @@ export class CommentsComponent implements OnInit {
     if (commentId === 'new') {
       this.commentAdded.emit(
         {
-          id: 'comment_' +  new Date().getTime().toString(),  // TODO generate a useful ID
+          id: 'comment_' + new Date().getTime().toString(),  // TODO generate a useful ID
           content: content,
           createDate: new Date().getTime().toString()
         } as Comment
@@ -88,14 +66,15 @@ export class CommentsComponent implements OnInit {
   }
 
   onCommentDelete(commentId: string): void {
-    const dialogref = this.dialog.open(DynamicDialogComponent, {
-      data: this.deleteCommentDialogData
+    const dialogRef = this.dialog.open(DynamicDialogComponent, {
+      data: deleteCommentDialogData
     });
-    dialogref.afterClosed().subscribe((result: boolean) => {
-      if (result === true) {
-        this.commentDeleted.emit(commentId);
-      }
-    });
-
+    dialogRef.afterClosed()
+      .pipe(take(1))
+      .subscribe((result: boolean) => {
+        if (result === true) {
+          this.commentDeleted.emit(commentId);
+        }
+      });
   }
 }
