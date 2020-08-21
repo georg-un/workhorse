@@ -44,7 +44,7 @@ export class CommentsComponent implements OnInit {
   /**
    * Emits the content of a newly added comment
    */
-  @Output() commentAdded: EventEmitter<string> = new EventEmitter<string>();
+  @Output() commentAdded: EventEmitter<Comment> = new EventEmitter<Comment>();
 
   /**
    * Emits a changed comment
@@ -66,7 +66,13 @@ export class CommentsComponent implements OnInit {
 
   onCommentSave(commentId: string, content: string): void {
     if (commentId === 'new') {
-      this.commentAdded.emit(content);
+      this.commentAdded.emit(
+        {
+          id: 'comment_' +  new Date().getTime().toString(),  // TODO generate a useful ID
+          content: content,
+          createDate: new Date().getTime().toString()
+        } as Comment
+      );
     } else {
       this.comments$
         .pipe(take(1))

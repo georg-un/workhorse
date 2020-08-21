@@ -1,5 +1,5 @@
 export enum StatusAction {
-  CLOSE = 'CLOSE',
+  DONE = 'DONE',
   ON_HOLD = 'ON_HOLD',
   CANCEL = 'CANCEL',
   REOPEN = 'REOPEN',
